@@ -1,0 +1,35 @@
+.newItem {
+    width: 100%;
+    border-radius: 15px;
+    height: 50px;
+    margin-top: 25px;
+    background-color: #e4e6e8;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    cursor: pointer;
+}
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .addItem {
+    animation: pulse 1.5s infinite;
+  }
+  
+.newItem i {
+    margin-left: 10px;
+}

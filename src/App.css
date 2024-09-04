@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: var(--background-light);
+  color: var(--text-color);
+}

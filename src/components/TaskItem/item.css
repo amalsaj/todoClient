@@ -1,0 +1,157 @@
+.task-item {
+  max-height: 200px !important;
+  background-color: #f9f9f9;
+  border-left: 6px solid #ff7300;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.task-item.completed {
+  background-color: #e6ffe6;
+  text-decoration: line-through;
+  border-left-color: #28a745;
+}
+
+.task-item h3 {
+  font-size: 18px;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.task-item p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+  flex-grow: 1;
+}
+
+.task-item .task-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.task-item button {
+  background-color: transparent !important;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.task-item button:hover {
+  color: #0056b3;
+}
+
+.task-item button:focus {
+  outline: none;
+}
+
+.task-item .starImp {
+  color: #f0f0f0; /* Base color of the icon */
+  text-shadow: 0 0 5px #f0f0f0, 0 0 10px #f0f0f0, 0 0 15px #f0f0f0; /* Static glow effect */
+  animation: glowing 1.5s infinite ease-in-out; /* Applying the animation */
+}
+
+@keyframes glowing {
+  0% {
+    text-shadow: 0 0 5px #f0f0f0, 0 0 10px #f0f0f0, 0 0 15px #f0f0f0;
+  }
+  50% {
+    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00; /* Brighter glow in the middle */
+  }
+  100% {
+    text-shadow: 0 0 5px #f0f0f0, 0 0 10px #f0f0f0, 0 0 15px #f0f0f0;
+  }
+}
+
+.task-item input[type="text"],
+.task-item input[type="time"],
+.task-item input[type="date"] {
+  width: 100%;
+  max-width: 150px;
+  margin: 13px ;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Responsive styling */
+@media (max-width: 1100px) {
+  .task-item {
+    max-height: 400px !important;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .task-item h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .task-item input[type="text"],
+  .task-item input[type="time"],
+  .task-item input[type="date"] {
+    font-size: 14px;
+  }
+
+  .task-item p {
+    font-size: 13px;
+    margin: 4px 0;
+  }
+
+  .task-item .starIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    font-size: 15px;
+  }
+
+  .task-item .task-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 0;
+  }
+
+  .task-item .task-actions button {
+    flex: 1;
+    font-size: 16px;
+    margin-right: 5px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .task-item {
+    padding: 10px;
+  }
+
+  .task-item h3 {
+    font-size: 14px;
+  }
+
+  .task-item input[type="text"],
+  .task-item input[type="time"],
+  .task-item input[type="date"] {
+    font-size: 14px;
+  }
+
+  .task-item p {
+    font-size: 12px;
+  }
+
+  .task-item .starIcon {
+    font-size: 12px;
+  }
+}
