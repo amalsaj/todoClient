@@ -1,9 +1,9 @@
 /* Container Styling */
 .signin-container {
   width: 100%;
-  max-width: 700px !important;
-  height: fit-content;
-  margin: 50px auto;
+  margin: 0 auto;
+  max-width: 700px;
+  margin: 70px auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -108,24 +108,65 @@ button[type="submit"]:active {
   background-color: transparent;
 }
 
-/* Media Query for Responsive Design */
-@media (max-width: 500px) {
+@media (max-width: 1200px) {
   .signin-container {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .form-group input {
+    font-size: 15px;
+  }
+
+  button {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .signin-container {
+    max-width: 550px;
+  }
+}
+
+@media (max-width: 768px) {
+  .signin-container {
+    max-width: 500px;
     padding: 15px;
-    margin: 30px 15px;
   }
 
   .form-group input {
     padding: 10px;
-    font-size: 15px;
+    font-size: 14px;
   }
 
-  button[type="submit"] {
+  button {
     padding: 12px;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .signup-link {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .signin-container {
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .form-group input {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .signup-link {
+    font-size: 13px;
   }
 }

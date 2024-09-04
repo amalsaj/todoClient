@@ -40,6 +40,7 @@ const SignUp = () => {
   };
 
   return (
+    <div className="container">
     <div className="signup-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
@@ -93,6 +94,7 @@ const SignUp = () => {
         autoHideDuration={2000}
         variant="success"
       />
+    </div>
     </div>
   );
 };

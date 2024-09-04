@@ -155,3 +155,28 @@
     font-size: 12px;
   }
 }
+@media (max-width: 500px) {
+  .task-item {
+    padding: 10px;
+    max-height: 350px !important;
+  }
+
+  .task-item h3 {
+    font-size: 14px;
+  }
+
+  .task-item input[type="text"],
+  .task-item input[type="time"],
+  .task-item input[type="date"] {
+    font-size: 14px;
+    max-width: 120px;
+  }
+
+  .task-item p {
+    font-size: 12px;
+  }
+
+  .task-item .starIcon {
+    font-size: 12px;
+  }
+}
