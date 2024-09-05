@@ -78,14 +78,14 @@ const SignIn = () => {
             </a>
           </p>
         </div>
-        <SnackbarProvider
+      </div>
+      <SnackbarProvider
           anchorOrigin={{
             vertical: "top",
             horizontal: "right",
           }}
           autoHideDuration={2000}
         />
-      </div>
     </div>
   );
 };

@@ -35,7 +35,6 @@
 .sidebar-toggle {
   position: fixed !important;
   top: 0px !important;
-  left: -81px;
   background-color: transparent !important;
   color: #000000 !important;
   border: none !important;
@@ -174,10 +173,5 @@
     font-size: 15px;
     margin-left: 18px;
     margin-top: 25px;
-  }
-
-  .sidebar-toggle {
-    left: -81px !important;
-    top: -20px;
   }
 }
