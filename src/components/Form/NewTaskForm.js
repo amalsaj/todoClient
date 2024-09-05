@@ -36,7 +36,6 @@ function NewTaskForm({ addTask, setForm }) {
           </option>
           <option value="Work">Work</option>
           <option value="Home">Home</option>
-          <option value="Fun">Fun</option>
         </select>
         <input
           type="date"

@@ -1,6 +1,7 @@
 import React from "react";
 import "./list.css";
 import TaskItem from "../TaskItem/TaskItem";
+import NoTasks from "../noTask/NoTask";
 
 function TaskList({
   tasks,
@@ -10,9 +11,29 @@ function TaskList({
   current,
   setForm,
 }) {
+  // To display current date
+  const today = new Date().toISOString().split("T")[0];
+  const dateObject = new Date(today);
+  const formattedDate = dateObject.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+
   return (
     <div>
-      <h2>Tasks for {current ? current : "Category"}</h2>
+      <div className="head-title">
+        <h2 className="task-heading">
+          {current === "Today"
+            ? `Today's Tasks (${formattedDate})`
+            : `${current} Tasks`}
+        </h2>
+        <p className="task-subheading">
+          {current === "Today"
+            ? "Make the most of today."
+            : "Keep going, you're doing great!"}
+        </p>
+      </div>
+
       <div className="newItem text-secondary mb-3">
         Add a new item
         <i className="bi bi-plus-square addItem" onClick={() => setForm()}></i>
@@ -28,7 +49,7 @@ function TaskList({
           />
         ))
       ) : (
-        <h3 className="fs-6 text-secondary mt-5"></h3>
+        <NoTasks />
       )}
     </div>
   );

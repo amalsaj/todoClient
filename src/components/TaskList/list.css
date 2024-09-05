@@ -1,35 +1,127 @@
 .newItem {
-    width: 100%;
-    border-radius: 15px;
-    height: 50px;
-    margin-top: 25px;
-    background-color: #e4e6e8;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    cursor: pointer;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 15px;
+  height: 50px;
+  margin-top: 25px;
+  background-color: #e4e6e8;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-@keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 0.7;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  
-  .addItem {
-    animation: pulse 1.5s infinite;
-  }
-  
+
+.head-title {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.task-heading {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.task-subheading {
+  font-size: 1.1rem;
+  color: #888;
+  font-style: italic;
+  margin: 0;
+}
+
+.addItem {
+  animation: pulse 1.5s infinite;
+}
+
+/* Icon inside newItem */
 .newItem i {
-    margin-left: 10px;
+  margin-left: 10px;
+}
+
+/* Media Queries for smaller screens */
+@media (max-width: 1024px) {
+  .newItem {
+    height: 45px;
+    font-size: 16px;
+    padding: 0 15px;
+  }
+
+  .task-heading {
+    font-size: 2.2rem;
+  }
+
+  .task-subheading {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .newItem {
+    height: 40px;
+    font-size: 15px;
+    padding: 0 10px;
+  }
+
+  .task-heading {
+    font-size: 2rem;
+  }
+
+  .task-subheading {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .newItem {
+    height: 35px;
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  .task-heading {
+    font-size: 1.8rem;
+  }
+
+  .task-subheading {
+    font-size: 0.85rem;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.no-tasks-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+  color: #cccccc;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

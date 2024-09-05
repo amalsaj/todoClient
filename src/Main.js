@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Main() {
   const [tasks, setTasks] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState("All");
+  const [currentCategory, setCurrentCategory] = useState("Today");
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [formVisible, setFormVisible] = useState(false);
 
@@ -42,10 +42,13 @@ function Main() {
   };
   const addTask = async (task) => {
     try {
-      await axios.post("https://todoserver-0wug.onrender.com/api/todo/createToDos", {
-        ...task,
-        email,
-      });
+      await axios.post(
+        "https://todoserver-0wug.onrender.com/api/todo/createToDos",
+        {
+          ...task,
+          email,
+        }
+      );
       enqueueSnackbar("New task added 🎉");
       fetchTasks();
       setFormVisible(false);
@@ -56,9 +59,12 @@ function Main() {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`https://todoserver-0wug.onrender.com/api/todo/deleteToDo`, {
-        data: { email, todoId: id },
-      });
+      await axios.delete(
+        `https://todoserver-0wug.onrender.com/api/todo/deleteToDo`,
+        {
+          data: { email, todoId: id },
+        }
+      );
       enqueueSnackbar("Task deleted 🎉");
       fetchTasks();
     } catch (error) {
@@ -69,11 +75,14 @@ function Main() {
   const toggleCompleteTask = async (id, isCompleted) => {
     console.log(id);
     try {
-      await axios.put(`https://todoserver-0wug.onrender.com/api/todo/updateToDo`, {
-        email,
-        todoId: id,
-        isCompleted,
-      });
+      await axios.put(
+        `https://todoserver-0wug.onrender.com/api/todo/updateToDo`,
+        {
+          email,
+          todoId: id,
+          isCompleted,
+        }
+      );
       isCompleted
         ? enqueueSnackbar("Task completed 🎉")
         : enqueueSnackbar("Task restored 🎉");
@@ -85,13 +94,16 @@ function Main() {
 
   const editTask = async (id, description, time, date) => {
     try {
-      await axios.put(`https://todoserver-0wug.onrender.com/api/todo/editToDo`, {
-        email,
-        todoId: id,
-        description,
-        time,
-        date,
-      });
+      await axios.put(
+        `https://todoserver-0wug.onrender.com/api/todo/editToDo`,
+        {
+          email,
+          todoId: id,
+          description,
+          time,
+          date,
+        }
+      );
       enqueueSnackbar("Task updated 🎉");
       fetchTasks();
     } catch (error) {
@@ -100,13 +112,13 @@ function Main() {
   };
 
   const categories = [
-    "All",
     "Today",
     "This Week",
     "This Month",
+    "All",
     "Work",
     "Home",
-    "Fun",
+    "Completed",
   ];
 
   const isToday = (date) => {
@@ -138,19 +150,26 @@ function Main() {
   const filterTasksByDate = (category) => {
     return tasks?.filter((task) => {
       const taskDate = new Date(task.date);
-      if (category === "All") {
-        return task;
-      }
-      if (category === "Today") {
-        return isToday(taskDate);
-      } else if (category === "This Week") {
-        return isThisWeek(taskDate) || isToday(taskDate);
-      } else if (category === "This Month") {
-        return (
-          isThisMonth(taskDate) || isThisWeek(taskDate) || isToday(taskDate)
-        );
-      } else {
-        return task.category === category;
+      const isNotCompleted = !task.isCompleted;
+
+      switch (category) {
+        case "All":
+          return isNotCompleted;
+        case "Today":
+          return isToday(taskDate) && isNotCompleted;
+        case "Completed":
+          return task.isCompleted;
+        case "This Week":
+          return (isThisWeek(taskDate) || isToday(taskDate)) && isNotCompleted;
+        case "This Month":
+          return (
+            (isThisMonth(taskDate) ||
+              isThisWeek(taskDate) ||
+              isToday(taskDate)) &&
+            isNotCompleted
+          );
+        default:
+          return task.category === category && isNotCompleted;
       }
     });
   };
@@ -174,10 +193,13 @@ function Main() {
                   setFormVisible(false);
                 }}
               >
-                {category}
-                <span className="badge">
-                  {filterTasksByDate(category)?.length}
-                </span>
+                <div className="d-flex justify-content-between align-items-center">
+                  <span>{category}</span>
+                  <span className="badge square-box"> </span>
+                </div>
+                <h1 className="fs-6 text-secondary">
+                  {filterTasksByDate(category)?.length} items
+                </h1>
               </Nav.Link>
             ))}
             <Nav.Link
@@ -214,9 +236,9 @@ function Main() {
         onClick={() => setIsSidebarVisible(!isSidebarVisible)}
       >
         {isSidebarVisible ? (
-          <i className="bi bi-toggle-on fs-3"></i>
+          <i class="fa-solid fa-bars fs-2"></i>
         ) : (
-          <i className="bi bi-toggle-off fs-3"></i>
+          <i className="fa-solid fa-bars fs-2"></i>
         )}
       </Button>
       <SnackbarProvider
