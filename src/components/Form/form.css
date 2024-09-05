@@ -4,7 +4,7 @@
   padding: 0 15px; /* Add some padding to prevent content from touching the edges on small screens */
 }
 
-form {
+.formTask {
   width: 100%;
   max-width:800px;
   display: flex;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {SnackbarProvider, enqueueSnackbar } from "notistack";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import "./signin.css";
 
 const SignIn = () => {
@@ -27,7 +27,7 @@ const SignIn = () => {
         localStorage.setItem("email", email);
         setSuccess(true);
         setError(null);
-        enqueueSnackbar("Login Sucessfull 🎉");
+        enqueueSnackbar("Login Successful 🎉", { variant: "success" });
         setTimeout(() => {
           navigate("/todo");
         }, 1000);
@@ -39,49 +39,53 @@ const SignIn = () => {
   };
 
   return (
-    <div className="signin-container">
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="container">
+      <div className="signin-container">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          {error && <p className="error-message">{error}</p>}
+          {success && <p className="success-message">Sign in successful!</p>}
+          
+          <div className="button-container">
+            <button type="submit">Login</button>
+          </div>
+        </form>
+        <div className="signup-redirect">
+          <p>
+            Don't have an account?{" "}
+            <a href="/signup" className="signup-link">
+              Sign Up
+            </a>
+          </p>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p className="error-message">{error}</p>}
-        {success && <p className="success-message">Sign in successful!</p>}
-        <button type="submit">Login</button>
-      </form>
-      <div className="signup-redirect text-secondary">
-        <p>
-          Don't have an account?{" "}
-          <a href="/signup" className="signup-link">
-            Sign Up
-          </a>
-        </p>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          autoHideDuration={2000}
+        />
       </div>
-      <SnackbarProvider
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        autoHideDuration={2000}
-        variant="success"
-      />
     </div>
   );
 };

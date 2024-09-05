@@ -22,7 +22,7 @@ function NewTaskForm({ addTask, setForm }) {
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form className="formTask" onSubmit={handleSubmit}>
         <h1 className="title">New Task</h1>
         <input
           type="text"
