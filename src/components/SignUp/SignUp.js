@@ -42,6 +42,9 @@ const SignUp = () => {
   return (
     <div className="login-background">
       <div className="login-card">
+        <div className="checkmark">
+          <i className="fas fa-check-circle"></i>
+        </div>
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
@@ -53,7 +56,7 @@ const SignUp = () => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
               required
-            />   
+            />
           </div>
           <div className="input-group">
             <i className="fas fa-envelope"></i>
@@ -79,9 +82,11 @@ const SignUp = () => {
           </div>
           {error && <p className="error-message">{error}</p>}
           {success && <p className="success-message">Signup successful!</p>}
-          
+
           <div className="button-container">
-            <button type="submit" className="login-button">Sign Up</button>
+            <button type="submit" className="login-button">
+              Sign Up
+            </button>
           </div>
         </form>
         <div className="signup-redirect">

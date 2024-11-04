@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "notistack"; // Import useSnackbar instead
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import "./signin.css";
 
 const Login = () => {
@@ -9,10 +9,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar(); // Call the hook to get enqueueSnackbar
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading state
+    setError(null); // Reset error state on new submission
 
     try {
       // API call to sign in
@@ -24,11 +26,14 @@ const Login = () => {
       if (response.status === 200) {
         // Store email in local storage (or other tokens as needed)
         localStorage.setItem("email", email);
+        
+        // Clear form fields after successful login
+        setEmail("");
+        setPassword("");
 
         // Display success message
         enqueueSnackbar("Login Successful 🎉", { variant: "success" });
 
-        // Navigate to the dashboard or home page after a brief delay
         setTimeout(() => {
           navigate("/todo");
         }, 1000);
@@ -39,6 +44,9 @@ const Login = () => {
       enqueueSnackbar("Failed to sign in. Please try again.", {
         variant: "error",
       });
+      console.error(err); // Log the error for debugging
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -72,8 +80,8 @@ const Login = () => {
           </div>
           {error && <p className="error-message">{error}</p>}
 
-          <button type="submit" className="login-button">
-            LOGIN
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? "Logging in..." : "LOGIN"}
           </button>
         </form>
         <div className="signup-redirect">
@@ -84,9 +92,18 @@ const Login = () => {
             </a>
           </p>
         </div>
+        
       </div>
+      <SnackbarProvider
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          autoHideDuration={2000}
+        />
     </div>
   );
 };
+
 
 export default Login;
