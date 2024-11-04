@@ -1,93 +1,92 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { SnackbarProvider, enqueueSnackbar } from "notistack";
+import { useSnackbar } from "notistack"; // Import useSnackbar instead
 import "./signin.css";
 
-const SignIn = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar(); // Call the hook to get enqueueSnackbar
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // API call to sign in
       const response = await axios.post(
         "https://todoserver-0wug.onrender.com/api/users/signin",
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
 
       if (response.status === 200) {
+        // Store email in local storage (or other tokens as needed)
         localStorage.setItem("email", email);
-        setSuccess(true);
-        setError(null);
+
+        // Display success message
         enqueueSnackbar("Login Successful 🎉", { variant: "success" });
+
+        // Navigate to the dashboard or home page after a brief delay
         setTimeout(() => {
           navigate("/todo");
         }, 1000);
       }
     } catch (err) {
+      // Capture error and display a snackbar notification
       setError(err.response?.data?.error || "Failed to sign in");
-      setSuccess(false);
+      enqueueSnackbar("Failed to sign in. Please try again.", {
+        variant: "error",
+      });
     }
   };
 
   return (
-    <div className="container">
-      <div className="signin-container">
-        <h2>Login</h2>
+    <div className="login-background">
+      <div className="login-card">
+        <div className="checkmark">
+          <i className="fas fa-check-circle"></i>
+        </div>
+        <h2>USER LOGIN</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+          <div className="input-group">
+            <i className="fas fa-envelope"></i>
             <input
               type="email"
-              id="email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+          <div className="input-group">
+            <i className="fas fa-lock"></i>
             <input
               type="password"
-              id="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
           {error && <p className="error-message">{error}</p>}
-          {success && <p className="success-message">Sign in successful!</p>}
-          
-          <div className="button-container">
-            <button type="submit">Login</button>
-          </div>
+
+          <button type="submit" className="login-button">
+            LOGIN
+          </button>
         </form>
         <div className="signup-redirect">
           <p>
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <a href="/signup" className="signup-link">
               Sign Up
             </a>
           </p>
         </div>
       </div>
-      <SnackbarProvider
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          autoHideDuration={2000}
-        />
     </div>
   );
 };
 
-export default SignIn;
+export default Login;

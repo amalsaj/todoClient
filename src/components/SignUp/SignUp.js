@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./signup.css";
+import "./signup.css"; // Make sure this file includes the new styles below
 import { useNavigate } from "react-router-dom";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
@@ -40,37 +40,40 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container">
-      <div className="signup-container">
+    <div className="login-background">
+      <div className="login-card">
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
+          <div className="input-group">
+            <i className="fas fa-user"></i>
             <input
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
               required
-            />
+            />   
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+          <div className="input-group">
+            <i className="fas fa-envelope"></i>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+          <div className="input-group">
+            <i className="fas fa-lock"></i>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
               required
             />
           </div>
@@ -78,10 +81,10 @@ const SignUp = () => {
           {success && <p className="success-message">Signup successful!</p>}
           
           <div className="button-container">
-            <button type="submit">Sign Up</button>
+            <button type="submit" className="login-button">Sign Up</button>
           </div>
         </form>
-        <div className="signin-redirect">
+        <div className="signup-redirect">
           <p>
             Already have an account?{" "}
             <a href="/" className="signin-link">
