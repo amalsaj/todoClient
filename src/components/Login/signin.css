@@ -14,7 +14,8 @@
   background-color: #2c2f33;
   border-radius: 15px;
   padding: 2rem;
-  width: 350px;
+  width: 90%; /* Make width responsive */
+  max-width: 350px; /* Set a max-width */
   text-align: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
   position: relative;
@@ -58,14 +59,16 @@
   margin-right: 0.5rem;
 }
 
+/* Make input field responsive */
 .input-group input {
   background: none;
   border: none;
   outline: none !important;
   color: #e0e0e0;
-  flex: 1;
+  flex: 1; /* Allow input to take up remaining space */
   padding: 0.5rem;
   font-size: 1rem;
+  min-width: 0; /* Prevent input from overflowing */
 }
 
 .input-group input::placeholder {
@@ -96,6 +99,7 @@
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
   margin-top: 1.5rem;
+  width: 100%; /* Make button width responsive */
 }
 
 .login-button:hover {

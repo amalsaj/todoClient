@@ -56,7 +56,7 @@ const Login = () => {
         <div className="checkmark">
           <i className="fas fa-check-circle"></i>
         </div>
-        <h2>USER LOGIN</h2>
+        <h2>LOGIN</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <i className="fas fa-envelope"></i>
